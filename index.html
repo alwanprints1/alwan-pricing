@@ -15,88 +15,72 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col md:flex-row">
 
-  <!-- Right Sidebar Menu -->
+  <!-- Sidebar Right -->
   <aside class="w-full md:w-64 bg-slate-900 border-b md:border-b-0 md:border-l border-slate-800 p-4 flex flex-col justify-between shrink-0">
     <div>
-      <!-- Logo Header -->
       <div class="flex items-center gap-3 mb-6 p-2 bg-slate-950/60 rounded-2xl border border-slate-800/80">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-black text-xl shadow-lg shadow-blue-500/30 text-white">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-black text-xl text-white">
           أ
         </div>
         <div>
-          <h1 class="font-black text-base text-white tracking-wide">مطبعة ألوان</h1>
+          <h1 class="font-black text-base text-white">مطبعة ألوان</h1>
           <p class="text-[10px] text-blue-400 font-medium">السيستم الموحد</p>
         </div>
       </div>
 
-      <!-- Main Systems Navigation -->
       <div class="space-y-2 mb-6">
-        <p class="text-[11px] font-bold text-slate-500 px-2 uppercase tracking-wider">أنظمة الورشة الأساسية</p>
+        <p class="text-[11px] font-bold text-slate-500 px-2 uppercase">أنظمة الورشة الأساسية</p>
 
-        <!-- System 1: Pricing -->
-        <button onclick="togglePricingMenu()" id="main-sys-pricing" class="w-full flex items-center justify-between p-3 rounded-xl font-bold text-xs bg-blue-600 text-white shadow-lg shadow-blue-600/20 transition cursor-pointer">
-          <div class="flex items-center gap-2">
-            <span>🧮 1. نظام التسعير</span>
-          </div>
+        <button onclick="togglePricingMenu()" id="main-sys-pricing" class="w-full flex items-center justify-between p-3 rounded-xl font-bold text-xs bg-blue-600 text-white shadow-lg cursor-pointer">
+          <span>🧮 1. نظام التسعير</span>
           <span id="pricing-arrow" class="text-[10px]">▲</span>
         </button>
 
-        <!-- Sub-menu for Pricing -->
         <div id="pricing-sub-menu" class="space-y-1 pr-3 border-r-2 border-blue-600/30 my-1">
-          <button onclick="navToPricingSub('general')" id="sub-pricing-general" class="w-full text-right p-2 rounded-lg text-xs font-semibold text-blue-400 bg-blue-600/10 transition cursor-pointer">
+          <button onclick="navToPricingSub('general')" id="sub-pricing-general" class="w-full text-right p-2 rounded-lg text-xs font-semibold text-blue-400 bg-blue-600/10 cursor-pointer">
             📄 طباعة تجارية ودعاية
           </button>
-          <button onclick="navToPricingSub('books')" id="sub-pricing-books" class="w-full text-right p-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 transition cursor-pointer">
+          <button onclick="navToPricingSub('books')" id="sub-pricing-books" class="w-full text-right p-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 cursor-pointer">
             📚 كتب وملازم دراسية
           </button>
-          <button onclick="navToPricingSub('fixed')" id="sub-pricing-fixed" class="w-full text-right p-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 transition cursor-pointer">
+          <button onclick="navToPricingSub('fixed')" id="sub-pricing-fixed" class="w-full text-right p-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 cursor-pointer">
             🏷️ المنتجات والكتالوج الثابت
           </button>
-          <button onclick="navToPricingSub('invoices')" id="sub-pricing-invoices" class="w-full text-right p-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 transition cursor-pointer flex justify-between items-center">
+          <button onclick="navToPricingSub('invoices')" id="sub-pricing-invoices" class="w-full text-right p-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 cursor-pointer flex justify-between items-center">
             <span>📄 إدارة الفواتير</span>
             <span id="badge-inv-count" class="bg-blue-600 text-white text-[9px] px-1.5 py-0.5 rounded-full">0</span>
           </button>
-          <button onclick="navToPricingSub('settings')" id="sub-pricing-settings" class="w-full text-right p-2 rounded-lg text-xs font-semibold text-amber-400 hover:text-amber-300 transition cursor-pointer">
+          <button onclick="navToPricingSub('settings')" id="sub-pricing-settings" class="w-full text-right p-2 rounded-lg text-xs font-semibold text-amber-400 hover:text-amber-300 cursor-pointer">
             ⚙️ الإعدادات والأسعار
           </button>
         </div>
 
-        <!-- System 2: Production -->
-        <button onclick="navToSystem('production')" id="main-sys-production" class="w-full flex items-center justify-between p-3 rounded-xl font-bold text-xs bg-slate-950 border border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700 transition cursor-pointer">
-          <div class="flex items-center gap-2">
-            <span>⚙️ 2. نظام الإنتاجية والورشة</span>
-          </div>
+        <button onclick="navToSystem('production')" id="main-sys-production" class="w-full flex items-center justify-between p-3 rounded-xl font-bold text-xs bg-slate-950 border border-slate-800 text-slate-400 hover:text-slate-200 cursor-pointer">
+          <span>⚙️ 2. نظام الإنتاجية والورشة</span>
           <span class="text-[9px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded">قريباً</span>
         </button>
 
-        <!-- System 3: Accounts -->
-        <button onclick="navToSystem('accounts')" id="main-sys-accounts" class="w-full flex items-center justify-between p-3 rounded-xl font-bold text-xs bg-slate-950 border border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700 transition cursor-pointer">
-          <div class="flex items-center gap-2">
-            <span>💰 3. نظام الحسابات والمالية</span>
-          </div>
+        <button onclick="navToSystem('accounts')" id="main-sys-accounts" class="w-full flex items-center justify-between p-3 rounded-xl font-bold text-xs bg-slate-950 border border-slate-800 text-slate-400 hover:text-slate-200 cursor-pointer">
+          <span>💰 3. نظام الحسابات والمالية</span>
           <span class="text-[9px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded">قريباً</span>
         </button>
       </div>
     </div>
-
     <div class="text-[10px] text-slate-500 text-center border-t border-slate-800/80 pt-3">
-      مطبعة ألوان © 2026 - البيانات محفوظة آلياً 💾
+      مطبعة ألوان © 2026 💾
     </div>
   </aside>
 
-  <!-- Main Content Body -->
+  <!-- Main Content -->
   <main class="flex-1 p-4 md:p-6 overflow-y-auto">
 
-    <!-- SYSTEM 1: PRICING SYSTEM CONTENT -->
     <div id="sys-container-pricing" class="space-y-6">
 
-      <!-- SUB 1: General Printing -->
+      <!-- SUB 1: General -->
       <section id="pricing-sec-general" class="space-y-5">
-        <div class="border-b border-slate-800 pb-3 flex justify-between items-center">
-          <div>
-            <h2 class="text-base font-bold text-white">تسعير الطباعة العادية والدعاية</h2>
-            <p class="text-[11px] text-slate-400">حساب كروت، بروشورات، فلايرات، وسائر المطبوعات التجارية</p>
-          </div>
+        <div class="border-b border-slate-800 pb-3">
+          <h2 class="text-base font-bold text-white">تسعير الطباعة العادية والدعاية</h2>
+          <p class="text-[11px] text-slate-400">حساب كروت، بروشورات، فلايرات، وسائر المطبوعات التجارية</p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
@@ -104,15 +88,15 @@
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
                 <label class="block text-[11px] font-semibold text-slate-400 mb-1">اسم العميل</label>
-                <input type="text" id="gen-cust" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white focus:border-blue-500 outline-none" placeholder="محمد سعيد">
+                <input type="text" id="gen-cust" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white" placeholder="محمد سعيد">
               </div>
               <div>
                 <label class="block text-[11px] font-semibold text-slate-400 mb-1">رقم الواتساب</label>
-                <input type="text" id="gen-phone" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white focus:border-blue-500 outline-none" placeholder="01012345678">
+                <input type="text" id="gen-phone" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white" placeholder="01012345678">
               </div>
               <div>
                 <label class="block text-[11px] font-semibold text-slate-400 mb-1">اسم الشغلانة</label>
-                <input type="text" id="gen-title" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white focus:border-blue-500 outline-none" value="بروشور A5">
+                <input type="text" id="gen-title" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white" value="بروشور A5">
               </div>
             </div>
 
@@ -130,17 +114,13 @@
               </div>
               <div>
                 <label class="block text-[11px] font-semibold text-slate-400 mb-1">نوع الورق والخامة</label>
-                <select id="gen-paper-select" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white">
-                  <!-- Populated dynamically -->
-                </select>
+                <select id="gen-paper-select" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white"></select>
               </div>
             </div>
 
             <div class="pt-2">
               <label class="block text-[11px] font-semibold text-slate-400 mb-2">خدمات التجهيز والتشطيب</label>
-              <div id="gen-services-container" class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                <!-- Populated dynamically -->
-              </div>
+              <div id="gen-services-container" class="grid grid-cols-2 sm:grid-cols-3 gap-2"></div>
             </div>
 
             <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 flex items-center justify-between">
@@ -152,7 +132,6 @@
             </div>
           </div>
 
-          <!-- Price Panel Output -->
           <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex flex-col justify-between">
             <div>
               <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">تفاصيل التكلفة والتسعير</h3>
@@ -171,18 +150,14 @@
             </div>
 
             <div class="space-y-2">
-              <button onclick="sendWhatsAppGen()" class="w-full py-2.5 bg-emerald-500 hover:bg-emerald-600 font-bold text-slate-950 rounded-xl text-xs transition cursor-pointer">
-                💬 إرسال عرض السعر (واتساب)
-              </button>
-              <button onclick="addGenToInvoice()" class="w-full py-2.5 bg-blue-600 hover:bg-blue-500 font-bold text-white rounded-xl text-xs transition cursor-pointer">
-                ➕ إضافة للفاتورة الحالية
-              </button>
+              <button onclick="sendWhatsAppGen()" class="w-full py-2.5 bg-emerald-500 hover:bg-emerald-600 font-bold text-slate-950 rounded-xl text-xs cursor-pointer">💬 إرسال عرض السعر (واتساب)</button>
+              <button onclick="addGenToInvoice()" class="w-full py-2.5 bg-blue-600 hover:bg-blue-500 font-bold text-white rounded-xl text-xs cursor-pointer">➕ إضافة للفاتورة الحالية</button>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SUB 2: Books Pricing -->
+      <!-- SUB 2: Books -->
       <section id="pricing-sec-books" class="hidden space-y-5">
         <div class="border-b border-slate-800 pb-3">
           <h2 class="text-base font-bold text-white">تسعير الكتب والملازم الدراسية</h2>
@@ -205,9 +180,7 @@
             </div>
             <div>
               <label class="block text-[11px] font-semibold text-slate-400 mb-1">نوع الورق الداخلي</label>
-              <select id="book-paper-select" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white">
-                <!-- Populated dynamically -->
-              </select>
+              <select id="book-paper-select" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white"></select>
             </div>
           </div>
 
@@ -224,23 +197,18 @@
               <span class="text-xs text-slate-400 block">إجمالي طباعة وتجليد الكتب:</span>
               <span id="book-total-disp" class="text-2xl font-bold text-blue-400 font-mono">0 ج.م</span>
             </div>
-            <button onclick="addBookToInvoice()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 font-bold rounded-xl text-xs cursor-pointer">
-              ➕ إضافة للفاتورة
-            </button>
+            <button onclick="addBookToInvoice()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 font-bold rounded-xl text-xs cursor-pointer">➕ إضافة للفاتورة</button>
           </div>
         </div>
       </section>
 
-      <!-- SUB 3: Fixed Catalog -->
+      <!-- SUB 3: Fixed -->
       <section id="pricing-sec-fixed" class="hidden space-y-5">
         <div class="border-b border-slate-800 pb-3">
           <h2 class="text-base font-bold text-white">المنتجات والكتالوج الثابت</h2>
           <p class="text-[11px] text-slate-400">أختام، دروع، مجات، وهدايا سريعة</p>
         </div>
-
-        <div id="fixed-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <!-- Dynamically Populated Cards -->
-        </div>
+        <div id="fixed-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
       </section>
 
       <!-- SUB 4: Invoices -->
@@ -283,9 +251,7 @@
                   <th class="p-3">حذف</th>
                 </tr>
               </thead>
-              <tbody id="invoice-items-body" class="divide-y divide-slate-800">
-                <!-- Items -->
-              </tbody>
+              <tbody id="invoice-items-body" class="divide-y divide-slate-800"></tbody>
             </table>
           </div>
 
@@ -301,7 +267,7 @@
         </div>
       </section>
 
-      <!-- SUB 5: Settings Master -->
+      <!-- SUB 5: Settings -->
       <section id="pricing-sec-settings" class="hidden space-y-5">
         <div class="border-b border-slate-800 pb-3">
           <h2 class="text-base font-bold text-amber-400">⚙️ إعدادات أسعار الخامات والخدمات والمنتجات</h2>
@@ -309,7 +275,6 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <!-- Papers list -->
           <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-3">
             <div class="flex justify-between items-center border-b border-slate-800 pb-2">
               <h3 class="text-xs font-bold text-white">1. خامات الورق وأسعار الفروخ</h3>
@@ -318,7 +283,6 @@
             <div id="settings-papers-list" class="space-y-2 max-h-56 overflow-y-auto"></div>
           </div>
 
-          <!-- Services list -->
           <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-3">
             <div class="flex justify-between items-center border-b border-slate-800 pb-2">
               <h3 class="text-xs font-bold text-white">2. خدمات التشطيب والتجهيز</h3>
@@ -327,10 +291,45 @@
             <div id="settings-services-list" class="space-y-2 max-h-56 overflow-y-auto"></div>
           </div>
 
-          <!-- Fixed products list -->
           <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-3 md:col-span-2">
             <div class="flex justify-between items-center border-b border-slate-800 pb-2">
               <h3 class="text-xs font-bold text-white">3. كتالوج المنتجات الثابتة (أختام/دروع)</h3>
               <button onclick="promptAddFixedProduct()" class="px-3 py-1 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-bold cursor-pointer">+ منتج جديد</button>
             </div>
-            <div id="settings-fixed-list" class="grid grid-cols-1
+            <div id="settings-fixed-list" class="grid grid-cols-1 sm:grid-cols-3 gap-2"></div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- SYSTEM 2 PLACEHOLDER -->
+    <div id="sys-container-production" class="hidden p-12 text-center bg-slate-900 rounded-2xl border border-slate-800 space-y-3">
+      <div class="text-4xl">⚙️</div>
+      <h2 class="text-lg font-bold text-white">نظام الإنتاجية والورشة</h2>
+      <p class="text-xs text-slate-400">مخصص لمتابعة مراحل الطباعة، القص، السلفان والتسليم. قيد التطوير للربط المباشر.</p>
+    </div>
+
+    <!-- SYSTEM 3 PLACEHOLDER -->
+    <div id="sys-container-accounts" class="hidden p-12 text-center bg-slate-900 rounded-2xl border border-slate-800 space-y-3">
+      <div class="text-4xl">💰</div>
+      <h2 class="text-lg font-bold text-white">نظام الحسابات والمالية</h2>
+      <p class="text-xs text-slate-400">مخصص لتقارير الخزينة، الأرباح، ومستحقات الموردين. قيد التطوير للربط المباشر.</p>
+    </div>
+
+  </main>
+
+  <!-- Complete Robust JS Code Engine -->
+  <script>
+    var appState = {
+      papers: [
+        { id: 'p1', name: 'كوشيه 150 جرام', price: 2.5 },
+        { id: 'p2', name: 'كوشيه 300 جرام', price: 4.5 },
+        { id: 'p3', name: 'ورق بوند 80 جرام', price: 1.2 },
+        { id: 'p4', name: 'دوبلكس 350 جرام', price: 5.0 },
+        { id: 'p5', name: 'بنر / فلكس (متر مربع)', price: 80.0 }
+      ],
+      services: [
+        { id: 's1', name: 'سلفان مط', unitPrice: 0.5 },
+        { id: 's2', name: 'سلفان لامع', unitPrice: 0.4 },
+        
