@@ -1,3 +1,337 @@
-import React, { useState, useEffect, useRef } from "react";
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نظام مطبعة ألوان الشامل</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Tajawal', sans-serif; }
+    /* Custom Scrollbar for Mobile & Desktop */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col md:flex-row">
 
-const LOGO_DATA_URL = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAcFBQYFBAcGBgYIBwcICxILCwoKCxYPEA0SGhYbGhkWGRgcICgiHB4mHhgZIzAkJiorLS4tGyIyNTEsNSgsLSz/2wBDAQcICAsJCxULCxUsHRkdLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCz/wAARCAFoAWgDASIAAhEBAxEB/8QAHQABAAICAwEBAAAAAAAAAAAAAAcIBQYBAwQCCf/EAFYQAAEDAwEEBgYFBwgGBgsAAAEAAgMEBREGBxIhMRNBUWFxgQgUIpGhsSMyQlLBFRZzgpKy0SQlM1NicnSiJzVDlMLwJjRUhOHiFxgoNjdGVWODs/H/xAAcAQEAAgMBAQEAAAAAAAAAAAAABQYDBAcCAQj/xAA7EQACAQMCAwQJAwIFBQEAAAAAAQIDBBEFIRIxQQYTUXEiMmGBkaGx0fAUweEjQhUkM4LxJUNSYnKy/9oADAMBAAIRAxEAPwCMERF38p4REQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAERSFsl2fN1jeX1lwYfyTROHSN5dM/mGZ7Os+XatW7uqdnRlXqvZGSnTlUkoxMTpHZtqHWQE1DTNgo84NVUEtjPh1u8lJNL6OtP0A9b1DKZcceipwGj3lSxW3CjsdLFAyIZ3d2GniABwOwcgB2rDS6hvectoqeIcw1xLj78hc5r9oNQupcVFqEenL6v9jfn+ktfRqvL/PAiq9ej5daWB0toukNeWjPQys6Jx8Dkj34UU3C3VlqrpaKvppKWpiOHxyNwQrZWrVzKmtZQ18PqlS/gw5yx57O4rGbTtA0+stPvkhja27UrC6m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
+  <!-- Right Sidebar Menu -->
+  <aside class="w-full md:w-64 bg-slate-900 border-b md:border-b-0 md:border-l border-slate-800 p-4 flex flex-col justify-between shrink-0">
+    <div>
+      <!-- Logo Header -->
+      <div class="flex items-center gap-3 mb-6 p-2 bg-slate-950/60 rounded-2xl border border-slate-800/80">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-black text-xl shadow-lg shadow-blue-500/30 text-white">
+          أ
+        </div>
+        <div>
+          <h1 class="font-black text-base text-white tracking-wide">مطبعة ألوان</h1>
+          <p class="text-[10px] text-blue-400 font-medium">السيستم الموحد</p>
+        </div>
+      </div>
+
+      <!-- Main 3 Systems Navigation -->
+      <div class="space-y-2 mb-6">
+        <p class="text-[11px] font-bold text-slate-500 px-2 uppercase tracking-wider">أنظمة الورشة الأساسية</p>
+
+        <!-- System 1: Pricing -->
+        <button onclick="togglePricingMenu()" id="main-sys-pricing" class="w-full flex items-center justify-between p-3 rounded-xl font-bold text-xs bg-blue-600 text-white shadow-lg shadow-blue-600/20 transition">
+          <div class="flex items-center gap-2">
+            <span>🧮 1. نظام التسعير</span>
+          </div>
+          <span id="pricing-arrow" class="text-[10px]">▲</span>
+        </button>
+
+        <!-- Sub-menu for Pricing -->
+        <div id="pricing-sub-menu" class="space-y-1 pr-3 border-r-2 border-blue-600/30 my-1">
+          <button onclick="navToPricingSub('general')" id="sub-pricing-general" class="w-full text-right p-2 rounded-lg text-xs font-semibold text-blue-400 bg-blue-600/10 transition">
+            📄 طباعة تجارية ودعاية
+          </button>
+          <button onclick="navToPricingSub('books')" id="sub-pricing-books" class="w-full text-right p-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 transition">
+            📚 كتب وملازم دراسية
+          </button>
+          <button onclick="navToPricingSub('fixed')" id="sub-pricing-fixed" class="w-full text-right p-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 transition">
+            🏷️ المنتجات والكتالوج الثابت
+          </button>
+          <button onclick="navToPricingSub('invoices')" id="sub-pricing-invoices" class="w-full text-right p-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 transition flex justify-between items-center">
+            <span>📄 إدارة الفواتير</span>
+            <span id="badge-inv-count" class="bg-blue-600 text-white text-[9px] px-1.5 py-0.5 rounded-full">0</span>
+          </button>
+          <button onclick="navToPricingSub('settings')" id="sub-pricing-settings" class="w-full text-right p-2 rounded-lg text-xs font-semibold text-amber-400 hover:text-amber-300 transition">
+            ⚙️ الإعدادات والأسعار
+          </button>
+        </div>
+
+        <!-- System 2: Production -->
+        <button onclick="navToSystem('production')" id="main-sys-production" class="w-full flex items-center justify-between p-3 rounded-xl font-bold text-xs bg-slate-950 border border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700 transition">
+          <div class="flex items-center gap-2">
+            <span>⚙️ 2. نظام الإنتاجية والورشة</span>
+          </div>
+          <span class="text-[9px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded">قريباً</span>
+        </button>
+
+        <!-- System 3: Accounts -->
+        <button onclick="navToSystem('accounts')" id="main-sys-accounts" class="w-full flex items-center justify-between p-3 rounded-xl font-bold text-xs bg-slate-950 border border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700 transition">
+          <div class="flex items-center gap-2">
+            <span>💰 3. نظام الحسابات والمالية</span>
+          </div>
+          <span class="text-[9px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded">قريباً</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="text-[10px] text-slate-500 text-center border-t border-slate-800/80 pt-3">
+      مطبعة ألوان © 2026 - البيانات محفوظة آلياً 💾
+    </div>
+  </aside>
+
+  <!-- Main Content Body -->
+  <main class="flex-1 p-4 md:p-6 overflow-y-auto">
+
+    <!-- SYSTEM 1: PRICING SYSTEM CONTENT -->
+    <div id="sys-container-pricing" class="space-y-6">
+
+      <!-- SUB 1: General Printing -->
+      <section id="pricing-sec-general" class="space-y-5">
+        <div class="border-b border-slate-800 pb-3 flex justify-between items-center">
+          <div>
+            <h2 class="text-base font-bold text-white">تسعير الطباعة العادية والدعاية</h2>
+            <p class="text-[11px] text-slate-400">حساب كروت، بروشورات، فلايرات، وسائر المطبوعات التجارية</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          <div class="lg:col-span-2 bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-400 mb-1">اسم العميل</label>
+                <input type="text" id="gen-cust" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white focus:border-blue-500 outline-none" placeholder="محمد سعيد">
+              </div>
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-400 mb-1">رقم الواتساب</label>
+                <input type="text" id="gen-phone" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white focus:border-blue-500 outline-none" placeholder="01012345678">
+              </div>
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-400 mb-1">اسم الشغلانة</label>
+                <input type="text" id="gen-title" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white focus:border-blue-500 outline-none" value="بروشور A5">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-400 mb-1">المقاس (عرض × طول سم)</label>
+                <div class="flex gap-2">
+                  <input type="number" id="gen-w" value="15" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-center text-white">
+                  <input type="number" id="gen-h" value="21" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-center text-white">
+                </div>
+              </div>
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-400 mb-1">الكمية المطلوبة</label>
+                <input type="number" id="gen-qty" value="1000" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-400 mb-1">نوع الورق والخامة</label>
+                <select id="gen-paper-select" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white">
+                  <!-- Populated from settings -->
+                </select>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <label class="block text-[11px] font-semibold text-slate-400 mb-2">خدمات التجهيز والتشطيب</label>
+              <div id="gen-services-container" class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                <!-- Populated from settings -->
+              </div>
+            </div>
+
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 flex items-center justify-between">
+              <label class="flex items-center gap-2 text-xs font-bold text-amber-400 cursor-pointer">
+                <input type="checkbox" id="gen-include-design" onchange="saveFormsState(); runGenCalculation();" class="accent-amber-500">
+                <span>إضافة تكلفة خدمة التصميم وإعداد الملفات</span>
+              </label>
+              <input type="number" id="gen-design-price" value="100" oninput="saveFormsState(); runGenCalculation();" class="w-24 bg-slate-900 border border-slate-800 rounded-lg p-1.5 text-xs text-center text-amber-400 font-mono">
+            </div>
+          </div>
+
+          <!-- Price Panel Output -->
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex flex-col justify-between">
+            <div>
+              <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">تفاصيل التكلفة والتسعير</h3>
+              <div class="bg-slate-950 p-4 rounded-xl border border-slate-800/80 space-y-2 text-xs text-slate-400 mb-4">
+                <div class="flex justify-between"><span>تكلفة الورق:</span><span id="gen-paper-cost" class="text-slate-200 font-mono">0 ج.م</span></div>
+                <div class="flex justify-between"><span>تكلفة الطباعة:</span><span id="gen-print-cost" class="text-slate-200 font-mono">0 ج.م</span></div>
+                <div class="flex justify-between"><span>تكلفة التجهيز:</span><span id="gen-services-cost" class="text-slate-200 font-mono">0 ج.م</span></div>
+                <div class="flex justify-between"><span>تكلفة التصميم:</span><span id="gen-design-cost" class="text-amber-400 font-mono">0 ج.م</span></div>
+              </div>
+
+              <div class="bg-blue-600/10 border border-blue-500/20 p-4 rounded-xl text-center mb-4">
+                <span class="text-xs text-blue-300 block mb-1">السعر النهائي للعميل</span>
+                <div class="text-3xl font-black text-white font-mono" id="gen-total-display">0</div>
+                <span class="text-[10px] text-blue-400">جنيه مصري</span>
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <button onclick="sendWhatsAppGen()" class="w-full py-2.5 bg-emerald-500 hover:bg-emerald-600 font-bold text-slate-950 rounded-xl text-xs transition">
+                💬 إرسال عرض السعر (واتساب)
+              </button>
+              <button onclick="addGenToInvoice()" class="w-full py-2.5 bg-blue-600 hover:bg-blue-500 font-bold text-white rounded-xl text-xs transition">
+                ➕ إضافة للفاتورة الحالية
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SUB 2: Books Pricing -->
+      <section id="pricing-sec-books" class="hidden space-y-5">
+        <div class="border-b border-slate-800 pb-3">
+          <h2 class="text-base font-bold text-white">تسعير الكتب والملازم الدراسية</h2>
+          <p class="text-[11px] text-slate-400">حساب عدد الصفحات، الورق الداخلي، خامات الأغلفة والتجليد</p>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl max-w-3xl space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-400 mb-1">اسم الكتاب / الملزمة</label>
+              <input type="text" id="book-title" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white" placeholder="كتاب الرياضيات">
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-400 mb-1">عدد الصفحات الداخلية</label>
+              <input type="number" id="book-pages" value="64" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white">
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-400 mb-1">الكمية المطلوبة</label>
+              <input type="number" id="book-qty" value="500" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white">
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-400 mb-1">نوع الورق الداخلي</label>
+              <select id="book-paper-select" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white">
+                <!-- Populated from settings -->
+              </select>
+            </div>
+          </div>
+
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 flex items-center justify-between">
+            <label class="flex items-center gap-2 text-xs font-bold text-amber-400 cursor-pointer">
+              <input type="checkbox" id="book-include-design" onchange="saveFormsState(); runBookCalculation();" class="accent-amber-500">
+              <span>إضافة تكلفة تصميم وتنسيق الغلاف والصفحات</span>
+            </label>
+            <input type="number" id="book-design-price" value="150" oninput="saveFormsState(); runBookCalculation();" class="w-24 bg-slate-900 border border-slate-800 rounded-lg p-1.5 text-xs text-center text-amber-400 font-mono">
+          </div>
+
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 flex justify-between items-center">
+            <div>
+              <span class="text-xs text-slate-400 block">إجمالي طباعة وتجليد الكتب:</span>
+              <span id="book-total-disp" class="text-2xl font-bold text-blue-400 font-mono">0 ج.م</span>
+            </div>
+            <button onclick="addBookToInvoice()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 font-bold rounded-xl text-xs">
+              ➕ إضافة للفاتورة
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SUB 3: Fixed Catalog -->
+      <section id="pricing-sec-fixed" class="hidden space-y-5">
+        <div class="border-b border-slate-800 pb-3">
+          <h2 class="text-base font-bold text-white">المنتجات والكتالوج الثابت</h2>
+          <p class="text-[11px] text-slate-400">أختام، دروع، مجات، وهدايا سريعة</p>
+        </div>
+
+        <div id="fixed-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Dynamically Populated Cards -->
+        </div>
+      </section>
+
+      <!-- SUB 4: Invoices -->
+      <section id="pricing-sec-invoices" class="hidden space-y-5">
+        <div class="border-b border-slate-800 pb-3 flex justify-between items-center">
+          <div>
+            <h2 class="text-base font-bold text-white">إدارة الفواتير الحالية والأوامر</h2>
+            <p class="text-[11px] text-slate-400">جميع البيانات محفوطة آلياً ولا تضيع بإعادة تحميل الصفحة</p>
+          </div>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">اسم العميل بالفاتورة</label>
+              <input type="text" id="inv-cust-name" oninput="saveFormsState()" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white" placeholder="عميل نقدي">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">رقم الموبايل</label>
+              <input type="text" id="inv-cust-phone" oninput="saveFormsState()" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white" placeholder="01000000000">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">حالة الدفع</label>
+              <select id="inv-status" onchange="saveFormsState()" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white">
+                <option value="عربون مدفوع">عربون مدفوع</option>
+                <option value="خالص مدفوع">خالص المدفوعات</option>
+                <option value="آجل / غير مدفوع">آجل</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-right text-xs">
+              <thead class="bg-slate-950 text-slate-400">
+                <tr>
+                  <th class="p-3">البند / الخدمة</th>
+                  <th class="p-3">الكمية</th>
+                  <th class="p-3">سعر القطعة</th>
+                  <th class="p-3">الإجمالي</th>
+                  <th class="p-3">حذف</th>
+                </tr>
+              </thead>
+              <tbody id="invoice-items-body" class="divide-y divide-slate-800">
+                <!-- Items -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="flex justify-between items-center pt-4 border-t border-slate-800">
+            <div class="text-sm">
+              إجمالي الفاتورة: <b id="inv-grand-total" class="text-2xl text-blue-400 font-mono mr-2">0</b> ج.م
+            </div>
+            <div class="flex gap-2">
+              <button onclick="clearCurrentInvoice()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-bold rounded-xl">تفريغ الفاتورة</button>
+              <button onclick="window.print()" class="px-6 py-2 bg-emerald-500 hover:bg-emerald-600 font-bold text-slate-950 text-xs rounded-xl">🖨️ طباعة الفاتورة</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SUB 5: Settings Master -->
+      <section id="pricing-sec-settings" class="hidden space-y-5">
+        <div class="border-b border-slate-800 pb-3">
+          <h2 class="text-base font-bold text-amber-400">⚙️ إعدادات أسعار الخامات والخدمات والمنتجات</h2>
+          <p class="text-[11px] text-slate-400">أي تعديل هنا يحفظ آلياً ويسمع في جميع القوائم فوراً</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <!-- Papers list -->
+          <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-3">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+              <h3 class="text-xs font-bold text-white">1. خامات الورق وأسعار الفروخ</h3>
+              <button onclick="promptAddPaper()" class="px-3 py-1 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-bold">+ ورق جديد</button>
+            </div>
+            <div id="settings-papers-list" class="space-y-2 max-h-56 overflow-y-auto"></div>
+          </div>
+
+          <!-- Services list -->
+          <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-3">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+              <h3 class="text-xs font-bold text-white">2. خدمات التشطيب والتجهيز</h3>
+              <button onclick="promptAddService()" class="px-3 py-1 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-bold">+ خدمة جديدة</button>
+            </div>
+            <div id="settings-services-list" class="space-y-2 max-h-56 overflow-y-auto"></div>
+          </div>
+
+          <!-- Fixed products list -->
+          <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-3 md:col-span-2">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+              <h3 class="text-xs font-bold text-white">3. كتالوج المنتجات الثابتة (أختام/دروع)</h3>
+              <button onclick="promptAddFixedProduct()" class="px-3 py-1 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-bold">+ منتج جديد</button>
+            </div>
+            <div id="settings-fixed-list" class="grid grid-cols-1 sm:grid-cols-3 gap-2"></d
